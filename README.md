@@ -1,7 +1,13 @@
 # KoopDV: Geospatial and temporal predictions of seismic velocities using Koopman methods
 
-Interpolate and extrapolate in time and space the dv/v measurements to create maps of changes in seismic velocities. These perturbations are proportional to shallow strains of Earth materials. Strains can also be obtained using surface displacements with remote sensing (GPS).
-Several factors contribute to altering seismic velocities/strains: changes in air temperature, precipitations (subsurface and as surface loads), earthquake damage, long term tectonic loading.
+Interpolate and extrapolate in time and space the dv/v measurements to create maps of changes in seismic velocities. Forecast and hindcase dv/v when the sensors are not (yet) running.
+
+Compare two main approaches:
+* Koopman Forecast (optimization on the global time series)
+* Recurrent Neural Networks (optimization on local short-term time series)
+
+
+The perturbation in seismic velocities are proportional to shallow strains of Earth materials. Strains can also be obtained using surface displacements with remote sensing (GPS). Several factors contribute to altering seismic velocities/strains: changes in air temperature, precipitations (subsurface and as surface loads), earthquake damage, long term tectonic loading.
 
 
 # Data
@@ -18,15 +24,15 @@ Several factors contribute to altering seismic velocities/strains: changes in ai
 
 
 # Installation
-Dependencies are Mallen et al, 2021 Deep Koopman Forecast module.
 Create a conda environment:
 
 ``conda env create -f environment.yml``
 
 ``conda activate koopdv``
 
-``pip install dpk-forecast``
-
+The dependencies are mostly scipy, torch, numpy, and the DPK module from https://github.com/AlexTMallen/dpk. To get a sense on how to use the core functions of DPK, check the source codes here:
+* ``model_object``: https://github.com/AlexTMallen/dpk/blob/main/dpk/model_objs.py
+* ``koopman_probabilistic``: https://github.com/AlexTMallen/dpk/blob/main/dpk/koopman_probabilistic.py
 
 # Initial tests
 
@@ -36,12 +42,14 @@ get_gps.ipnyb is the script to download the GPS time series and put them into a 
 
 # Initial goals
 
-1 - Include geospatial information by joining stations, and adding lat-long information of the seismometers. There is some spatial correlation in southern california. Otherdata from colleague could be even smoother (deeper)
+1 - Perform forecast using DPK and using RNNS on individual time series. Compare both.
+
+2- Perform geospatial forecast using DPK by adding geospatial attribute to the DPK neural networks. 
 
 2 - Improve temporal forecast, hindcast, gap filling using DPK or LSTMs/GRUs at individual sites
 
-3 - Include temperature, precipitation, to improve temporal forecast/hindcast/gap filling (additional data set that should help the fit)
+3 - Include other factors (temperature, precipitation), to inform temporal forecast/hindcast/gap filling (additional data set that should help the fit)
 
-4 - Include GPS time series (or their derivative strains) in the mix to improve the geospatial prediction
+4 - Include GPS time series (or their derivative strains) to further inform the geospatial prediction
 
 
