@@ -30,7 +30,9 @@ Create a conda environment:
 
 ``conda activate koopdv``
 
-The dependencies are mostly scipy, torch, numpy, and the DPK module from https://github.com/AlexTMallen/dpk. 
+The dependencies are mostly scipy, torch, numpy, and the DPK module from https://github.com/AlexTMallen/dpk. To get a sense on how to use the core functions of DPK, check the source codes here:
+* ``model_object``: https://github.com/AlexTMallen/dpk/blob/main/dpk/model_objs.py
+* ``koopman_probabilistic``: https://github.com/AlexTMallen/dpk/blob/main/dpk/koopman_probabilistic.py
 
 # Initial tests
 
